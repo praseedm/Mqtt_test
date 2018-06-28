@@ -2,7 +2,7 @@ import { Component, OnDestroy } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
 import {MqttService, IMqttMessage} from 'ngx-mqtt';
-import { Observable, Subscription } from 'rxjs'
+import { Subscription } from 'rxjs'
 
 @Component({
   selector: 'page-home',
