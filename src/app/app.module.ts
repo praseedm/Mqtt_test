@@ -11,7 +11,10 @@ import { MqttModule, MqttService , IMqttServiceOptions} from 'ngx-mqtt';
 
 export const MQTT_SERVICE_OPTIONS : IMqttServiceOptions = {
   hostname: 'm10.cloudmqtt.com',
-  port: 14256
+  port: 34256,
+  protocol : "wss",
+  username : "zpbhhyxf",
+  password : "BkeQAcXlMrO8"
 };
 
 export function mqttServiceFactory() {
