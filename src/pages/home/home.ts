@@ -9,7 +9,13 @@ import { Subscription } from 'rxjs'
   templateUrl: 'home.html'
 })
 export class HomePage implements OnDestroy {
-  message : string = "def";
+  message : string = "";
+  topic : string = "";
+  author : string = "app : ";
+  publishM : string = "";
+  messageArray = [];
+  temp: string="hai";
+
   private subs : Subscription;
 
   constructor(public navCtrl: NavController,
@@ -17,15 +23,24 @@ export class HomePage implements OnDestroy {
 
     console.log(this.mqttService);
     
-    this.subs = this.mqttService.observe("first").subscribe(
+    this.messageArray.push(this.temp);
+
+  }
+
+  public subscribe( topic : string){
+
+    this.messageArray = [];
+    this.subs = this.mqttService.observe(topic).subscribe(
       (message : IMqttMessage) => {
         console.log(message);
         this.message = message.payload.toString();
+        this.messageArray.push(this.message);
       }
     );
+  }
 
-    this.mqttService.unsafePublish("first", "ngx");
-
+  public publish(topic:string, publishM:String) {
+    this.mqttService.unsafePublish(topic, this.author + publishM);
   }
 
   public ngOnDestroy() {
